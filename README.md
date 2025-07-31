@@ -24,12 +24,12 @@
       font-size: 4em;
       margin: 0;
       letter-spacing: 2px;
-      color: #121212;
+      color: hsl(0, 0%, 97%);
     }
 
     h2 {
       font-size: 1.6em;
-      color: #121212;
+      color: hsl(244, 92%, 47%);
       margin-top: 10px;
     }
 
@@ -174,3 +174,4 @@
 
 </body>
 </html>
+<!-- END OF HTML DOCUMENT -->
