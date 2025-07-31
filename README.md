@@ -5,32 +5,33 @@
   <title>INDASTRIAL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Stile base */
+    /* Font e base */
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: #f0f0f0;
+      background-color: #f0f4f8;
+      color: #1a1a1a;
       scroll-behavior: smooth;
+      line-height: 1.6;
     }
 
     header {
       text-align: center;
-      padding: 100px 20px 50px;
-      background: linear-gradient(135deg, #00ffcc, #0077b6);
+      padding: 100px 20px 60px;
+      background: linear-gradient(135deg, #00aaff, #0055cc);
+      color: white;
     }
 
     h1 {
-      font-size: 4em;
+      font-size: 3.5em;
       margin: 0;
       letter-spacing: 2px;
-      color: hsl(0, 0%, 97%);
     }
 
     h2 {
-      font-size: 1.6em;
-      color: hsl(244, 92%, 47%);
-      margin-top: 10px;
+      font-size: 1.8em;
+      color: #0055cc;
+      margin-top: 0;
     }
 
     .buttons {
@@ -38,31 +39,40 @@
     }
 
     .buttons button {
-      background-color: #121212;
-      color: #00ffcc;
-      border: 2px solid #00ffcc;
+      background: linear-gradient(135deg, #ffffff, #e0f0ff);
+      color: #0055cc;
+      border: 2px solid #0055cc;
       padding: 12px 25px;
       font-size: 1em;
       margin: 10px;
-      border-radius: 8px;
+      border-radius: 30px;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-weight: bold;
     }
 
     .buttons button:hover {
-      background-color: #00ffcc;
-      color: #121212;
+      background: #0055cc;
+      color: white;
     }
 
     section {
       padding: 80px 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
+    }
+
+    .section-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 40px;
+      margin-bottom: 40px;
+      animation: fadeIn 0.6s ease forwards;
     }
 
     #scopri, #contatti, #social {
       display: none;
-      animation: fadeIn 0.6s ease forwards;
     }
 
     @keyframes fadeIn {
@@ -70,46 +80,56 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Form di contatto */
     form {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
     }
 
     input, textarea {
-      padding: 10px;
+      padding: 15px;
       font-size: 1em;
-      border: none;
-      border-radius: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fdfdfd;
+      color: #121212;
     }
 
     textarea {
       resize: vertical;
-      min-height: 100px;
+      min-height: 120px;
     }
 
     button[type="submit"] {
-      background-color: #00ffcc;
-      color: #121212;
+      background: linear-gradient(135deg, #00aaff, #0055cc);
+      color: white;
       border: none;
       font-weight: bold;
+      padding: 12px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
     button[type="submit"]:hover {
-      background-color: #00ccb3;
+      background: #0048a3;
     }
 
     a.social-link {
-      display: block;
-      color: #00ffcc;
+      display: inline-block;
+      color: #0055cc;
       font-weight: bold;
-      margin: 10px 0;
+      margin: 10px 15px 0 0;
       text-decoration: none;
+      padding: 10px 15px;
+      border: 1px solid #0055cc;
+      border-radius: 20px;
+      transition: all 0.3s ease;
     }
 
     a.social-link:hover {
-      text-decoration: underline;
+      background-color: #0055cc;
+      color: white;
     }
   </style>
 </head>
@@ -118,26 +138,25 @@
   <!-- HEADER -->
   <header>
     <h1>INDASTRIAL</h1>
-    <h2>top citta di minecraft</h2>
+    <h2>top città di Minecraft</h2>
     <div class="buttons">
-      <button onclick="showSection('scopri')">scopri di più</button>
-      <button onclick="showSection('contatti')">contattaci</button>
-      <button onclick="showSection('social')">social</button>
+      <button onclick="showSection('scopri')" aria-label="Scopri di più su Indastrial">Scopri di più</button>
+      <button onclick="showSection('contatti')" aria-label="Contattaci tramite il modulo">Contattaci</button>
+      <button onclick="showSection('social')" aria-label="Visita i nostri social network">Social</button>
     </div>
   </header>
 
   <!-- SEZIONE SCOPRI -->
-  <section id="scopri">
+  <section id="scopri" class="section-card">
     <h2>Chi siamo</h2>
     <p>
-      Ciao, noi siamo tre ragazzi che costruiamo INDASTRIAL.  
-      INDASTRIAL è un mondo e server di Minecraft, in cui ci sono case, edifici e importanti monumenti di una città inventata da noi.  
-      Però ci sono anche monumenti della vita reale, tipo la Casa Bianca e le TORRI GEMELLE!!
+      Ciao, siamo tre ragazzi che costruiamo INDASTRIAL, un mondo unico e un server di Minecraft.<br>
+      La nostra città è piena di edifici, case, strutture reali come la Casa Bianca e le TORRI GEMELLE, oltre a monumenti originali creati da noi!
     </p>
   </section>
 
   <!-- SEZIONE CONTATTACI -->
-  <section id="contatti">
+  <section id="contatti" class="section-card">
     <h2>Contattaci</h2>
     <form action="mailto:indastrialstaff@gmail.com" method="POST" enctype="text/plain">
       <input type="text" name="Nome" placeholder="Nome Utente" required>
@@ -148,7 +167,7 @@
   </section>
 
   <!-- SEZIONE SOCIAL -->
-  <section id="social">
+  <section id="social" class="section-card">
     <h2>Seguici sui social</h2>
     <a class="social-link" href="https://youtube.com/@indastrialofficial-u9m?si=rtqZpgclGmGtp1Z7" target="_blank">YouTube</a>
     <a class="social-link" href="https://whatsapp.com/channel/0029Vb6tN94J3jv2rC9Gvz1V" target="_blank">WhatsApp</a>
@@ -164,7 +183,6 @@
         document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
       });
 
-      // Scroll to section
       const section = document.getElementById(sectionId);
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
@@ -174,4 +192,5 @@
 
 </body>
 </html>
+
 <!-- END OF HTML DOCUMENT -->
