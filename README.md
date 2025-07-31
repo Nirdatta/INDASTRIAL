@@ -5,7 +5,6 @@
   <title>INDASTRIAL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Font e base */
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,6 +12,20 @@
       color: #1a1a1a;
       scroll-behavior: smooth;
       line-height: 1.6;
+    }
+
+    .version-label {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      background-color: #0055cc;
+      color: white;
+      padding: 6px 12px;
+      font-size: 0.85em;
+      font-weight: bold;
+      border-radius: 6px;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     header {
@@ -135,6 +148,9 @@
 </head>
 <body>
 
+  <!-- Etichetta versione -->
+  <div class="version-label">sito web indastrial 2.0</div>
+
   <!-- HEADER -->
   <header>
     <h1>INDASTRIAL</h1>
@@ -193,4 +209,3 @@
 </body>
 </html>
 
-<!-- END OF HTML DOCUMENT -->
