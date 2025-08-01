@@ -434,7 +434,7 @@
   <section id="notizie">
     <h2>Notizie</h2>
     <div id="notizie-list">
-      <!-- Spazio per contenuti futuri -->
+      <!-- Le notizie saranno caricate qui -->
     </div>
     <button id="addNewsBtn" style="display:none; margin-top:20px;">
       AGGIUNGI NUOVA NOTIZIA
@@ -489,10 +489,16 @@
 
   <!-- JAVASCRIPT -->
   <script>
+    // Mostra sempre la sezione notizie a tutti
     function showSection(sectionId) {
       const sections = ['scopri', 'contatti', 'social', 'notizie', 'password'];
       sections.forEach(id => {
-        document.getElementById(id).style.display = (id === sectionId || id === 'notizie') ? 'block' : 'none';
+        // La sezione notizie è sempre visibile
+        if (id === 'notizie') {
+          document.getElementById(id).style.display = 'block';
+        } else {
+          document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
+        }
       });
 
       // Scroll to section
@@ -507,14 +513,14 @@
     // Carica le notizie salvate all'avvio
     window.addEventListener('DOMContentLoaded', function() {
       loadNews();
+      document.getElementById('versionNumber').innerText = getVersion();
     });
 
     function loadNews() {
       const newsList = document.getElementById('notizie-list');
       newsList.innerHTML = '';
       const savedNews = JSON.parse(localStorage.getItem('newsList') || '[]');
-      savedNews.forEach(news => {
-        // Se c'è un'immagine valida (base64), mostra l'immagine, altrimenti niente
+      savedNews.forEach((news, idx) => {
         let imageTag = '';
         if (news.image && news.image.startsWith('data:image')) {
           imageTag = `<img src="${news.image}" alt="Immagine notizia" style="max-width:100%;margin-bottom:10px;border-radius:8px;">`;
@@ -524,7 +530,7 @@
             <h3>${news.title}</h3>
             ${imageTag}
             <p>${news.text}</p>
-            <button class="deleteNewsBtn" style="position:absolute; top:10px; right:10px; background-color:var(--gemini-pink); color:#fff; border:none; padding:5px 12px; border-radius:6px; cursor:pointer;">Elimina</button>
+            ${isCreator ? `<button class="deleteNewsBtn" data-idx="${idx}" style="position:absolute; top:10px; right:10px; background-color:var(--gemini-pink); color:#fff; border:none; padding:5px 12px; border-radius:6px; cursor:pointer;">Elimina</button>` : ''}
           </div>
         `;
       });
@@ -543,6 +549,7 @@
         isCreator = true;
         showSection('notizie');
         document.getElementById('addNewsBtn').style.display = 'inline-block';
+        loadNews(); // Ricarica per mostrare i bottoni elimina
       } else {
         alert("Accesso negato.");
       }
@@ -557,6 +564,8 @@
     document.getElementById('cancelNews').addEventListener('click', function() {
       document.getElementById('newsForm').reset();
       document.getElementById('newsForm').style.display = 'none';
+      const preview = document.getElementById('newsImagePreview');
+      if (preview) preview.remove();
     });
 
     // Carica la notizia nella lista e salva
@@ -574,7 +583,6 @@
           savedNews.push(newsObj);
           saveNewsList(savedNews);
           loadNews();
-          // Aggiorna versione
           let version = parseFloat(getVersion());
           version = Math.round((version + 0.1) * 10) / 10;
           setVersion(version.toFixed(1));
@@ -585,7 +593,6 @@
         savedNews.push(newsObj);
         saveNewsList(savedNews);
         loadNews();
-        // Aggiorna versione
         let version = parseFloat(getVersion());
         version = Math.round((version + 0.1) * 10) / 10;
         setVersion(version.toFixed(1));
@@ -594,6 +601,8 @@
       // Reset form e nascondi
       document.getElementById('newsForm').reset();
       document.getElementById('newsForm').style.display = 'none';
+      const preview = document.getElementById('newsImagePreview');
+      if (preview) preview.remove();
     });
 
     // ANTEPRIMA IMMAGINE
@@ -623,8 +632,9 @@
 
     // Funzione per aggiungere listener ai bottoni elimina
     function addDeleteListeners() {
-      document.querySelectorAll('.deleteNewsBtn').forEach((btn, idx) => {
+      document.querySelectorAll('.deleteNewsBtn').forEach(btn => {
         btn.onclick = function() {
+          const idx = parseInt(btn.getAttribute('data-idx'));
           if (confirm("Sei sicuro di voler eliminare questa notizia? L'azione è permanente!")) {
             let savedNews = JSON.parse(localStorage.getItem('newsList') || '[]');
             savedNews.splice(idx, 1);
